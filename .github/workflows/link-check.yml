@@ -12,7 +12,7 @@ jobs:
   links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Check links with lychee
         id: lychee
@@ -32,7 +32,7 @@ jobs:
 
       - name: Create issue on failure
         if: failure()
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: Link check found broken links
           content-filepath: /tmp/lychee/out.md
