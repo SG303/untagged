@@ -11,15 +11,15 @@
      without JS the system preference still applies. */
   color-scheme: light dark;
 
-  --paper: light-dark(#f7f8fa, #131a2a);
-  --ink: light-dark(#1a2233, #e2e6ee);
-  --ink-soft: light-dark(#323c50, #c3c9d6);
-  --muted: light-dark(#566072, #9aa4b8);
-  --accent: light-dark(#b3204f, #f27aa0);
-  --rule: light-dark(#e9a9bc, #6a3550);
-  --line: light-dark(#dfe3ea, #263048);
-  --code-bg: light-dark(#ffffff, #0e1422);
-  --mark: light-dark(#f6d3de, #4a2338);
+  --paper: light-dark(#f7f8fa, #1b1c1e);
+  --ink: light-dark(#1a2233, #e5e5e6);
+  --ink-soft: light-dark(#323c50, #c6c7c9);
+  --muted: light-dark(#566072, #9d9ea2);
+  --accent: light-dark(#556a30, #a5b47c);
+  --rule: light-dark(#b8c491, #4b5435);
+  --line: light-dark(#dfe3ea, #2e2f32);
+  --code-bg: light-dark(#ffffff, #151618);
+  --mark: light-dark(#e3ead0, #3b4329);
 
   --font-serif: Charter, 'Bitstream Charter', 'Sitka Text', 'Iowan Old Style', Cambria, Georgia,
     serif;

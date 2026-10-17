@@ -2,11 +2,11 @@
   <style>
     .paper { fill: #f7f8fa; }
     .ink { stroke: #1a2233; }
-    .rule { stroke: #b3204f; }
+    .rule { stroke: #556a30; }
     @media (prefers-color-scheme: dark) {
-      .paper { fill: #131a2a; }
-      .ink { stroke: #e2e6ee; }
-      .rule { stroke: #f27aa0; }
+      .paper { fill: #1b1c1e; }
+      .ink { stroke: #e5e5e6; }
+      .rule { stroke: #a5b47c; }
     }
   </style>
   <rect class="paper" width="64" height="64" rx="14"/>
