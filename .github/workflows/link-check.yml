@@ -1,0 +1,39 @@
+# Monthly link-rot check over all Markdown files.
+# On failure, an issue is created listing the broken links.
+name: Link check
+
+on:
+  schedule:
+    # 02:30 UTC, first day of the month
+    - cron: '30 2 1 * *'
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check links with lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --max-retries=2
+            --timeout=20s
+            './**/*.md'
+            './**/*.astro'
+            --exclude 'https?://(localhost|127\.0\.0\.1|.*\.local)'
+          fail: true
+          format: json
+          output: /tmp/lychee/out.json
+
+      - name: Create issue on failure
+        if: failure()
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Link check found broken links
+          content-filepath: /tmp/lychee/out.md
+          labels: report, automated-issue

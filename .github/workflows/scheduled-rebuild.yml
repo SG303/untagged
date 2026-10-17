@@ -1,0 +1,27 @@
+# Nightly rebuild trigger.
+#
+# Posts with today's (or an already passed future) pubDate become visible with the
+# first build of that day. Cloudflare only builds on push, so this pings the
+# project's deploy hook once a night. The hook URL is stored in the repo secret
+# CLOUDFLARE_DEPLOY_HOOK (Workers project -> Settings -> Deploy hooks).
+name: Scheduled rebuild
+
+on:
+  schedule:
+    # 00:05 UTC — shortly after midnight so today's posts appear when the day starts
+    - cron: '5 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare deploy hook
+        env:
+          CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$CLOUDFLARE_DEPLOY_HOOK" ]; then
+            echo "::error::Secret CLOUDFLARE_DEPLOY_HOOK is not set (Workers project -> Settings -> Deploy hooks)"
+            exit 1
+          fi
+          curl -sS -X POST "$CLOUDFLARE_DEPLOY_HOOK"

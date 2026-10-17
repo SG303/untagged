@@ -1,12 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
 import { SITE, POSTS_ON_HOME } from '../consts';
+import { getPublishedPosts } from '../utils/posts';
 
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const allPosts = await getPublishedPosts();
 const posts = allPosts.slice(0, POSTS_ON_HOME);
 ---
 
