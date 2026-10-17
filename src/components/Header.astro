@@ -83,9 +83,17 @@ const ariaCurrent = (href: string) => {
 
   nav a {
     display: inline-block;
+    position: relative;
     padding-block: 0.375rem;
     color: var(--muted);
     text-decoration: none;
+  }
+
+  /* Invisible hit-area extension so the small links meet the ~44px touch guideline */
+  nav a::after {
+    content: '';
+    position: absolute;
+    inset: -0.5rem -1rem;
   }
 
   nav a:hover {

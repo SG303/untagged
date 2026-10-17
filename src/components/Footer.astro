@@ -38,7 +38,15 @@ const year = new Date().getFullYear();
   }
 
   a {
+    position: relative;
     color: var(--muted);
+  }
+
+  /* Invisible hit-area extension for touch screens */
+  a::after {
+    content: '';
+    position: absolute;
+    inset: -0.5rem -1rem;
   }
 
   a:hover {
