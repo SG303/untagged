@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { SITE } from '../../consts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Base title="Blog" description={`All posts by ${SITE.author}`}>
+  <header class="page-head">
+    <h1>Blog</h1>
+    <p>Everything written here so far, newest first.</p>
+  </header>
+  <PostList posts={posts} />
+</Base>

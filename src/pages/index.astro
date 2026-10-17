@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { SITE, POSTS_ON_HOME } from '../consts';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const posts = allPosts.slice(0, POSTS_ON_HOME);
+---
+
+<Base>
+  <section class="intro">
+    <h1>{SITE.tagline}</h1>
+    <p>{SITE.description}</p>
+  </section>
+
+  <section aria-labelledby="latest">
+    <h2 id="latest" class="section-title">Latest posts</h2>
+    <PostList posts={posts} headingLevel="h3" />
+    {
+      allPosts.length > 0 && (
+        <p class="more">
+          <a href="/blog/">Browse all {allPosts.length} posts</a>
+        </p>
+      )
+    }
+  </section>
+</Base>
+
+<style>
+  .intro {
+    margin-bottom: clamp(3.5rem, 9vw, 5.5rem);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 1.8rem + 3.2vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+
+  .intro p {
+    margin-top: 1.25rem;
+    max-width: 30em;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--muted);
+  }
+</style>

@@ -1,0 +1,47 @@
+---
+import { SITE } from '../consts';
+import { socialLinks } from '../utils/social';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer hang">
+  <p class="hang__margin">&copy; {year} {SITE.author}</p>
+  <ul>
+    {
+      socialLinks.map((link) => (
+        <li>
+          <a href={link.href}>{link.label}</a>
+        </li>
+      ))
+    }
+    <li><a href="/rss.xml">RSS</a></li>
+  </ul>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: 2rem clamp(2rem, 5vw, 3rem);
+    align-items: baseline;
+    row-gap: 0.5rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+
+  a {
+    color: var(--muted);
+  }
+
+  a:hover {
+    color: var(--accent);
+  }
+</style>

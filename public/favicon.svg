@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .paper { fill: #f7f8fa; }
+    .ink { stroke: #1a2233; }
+    .rule { stroke: #b3204f; }
+    @media (prefers-color-scheme: dark) {
+      .paper { fill: #131a2a; }
+      .ink { stroke: #e2e6ee; }
+      .rule { stroke: #f27aa0; }
+    }
+  </style>
+  <rect class="paper" width="64" height="64" rx="14"/>
+  <path class="rule" d="M22 8v48" stroke-width="4"/>
+  <path class="ink" d="M31 22h21M31 32h21M31 42h13" stroke-width="5" stroke-linecap="round"/>
+</svg>

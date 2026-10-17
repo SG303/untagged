@@ -1,0 +1,102 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, pubDate, updatedDate, tags } = post.data;
+---
+
+<Base title={title} description={description}>
+  <article>
+    <header class="post-head hang">
+      <div class="meta hang__margin">
+        <p><FormattedDate date={pubDate} style="long" /></p>
+        {
+          updatedDate && (
+            <p>
+              Updated <FormattedDate date={updatedDate} style="long" />
+            </p>
+          )
+        }
+        {
+          tags.length > 0 && (
+            <ul class="tags" aria-label="Tags">
+              {tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+      <div>
+        <h1>{title}</h1>
+        <p class="lede">{description}</p>
+      </div>
+    </header>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <p class="more back"><a href="/blog/">Back to all posts</a></p>
+</Base>
+
+<style>
+  .post-head {
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+    row-gap: 1rem;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 0.75rem;
+    padding: 0;
+    list-style: none;
+    color: var(--ink-soft);
+  }
+
+  .lede {
+    margin-top: 1rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .back {
+    margin-top: 4rem;
+  }
+
+  @media (min-width: 60em) {
+    .post-head {
+      row-gap: 0;
+    }
+
+    .meta {
+      flex-direction: column;
+      padding-top: 0.75rem;
+    }
+
+    .tags {
+      flex-direction: column;
+      margin-top: 0.5rem;
+    }
+  }
+</style>

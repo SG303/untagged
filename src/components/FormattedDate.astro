@@ -1,0 +1,21 @@
+---
+import { SITE } from '../consts';
+
+interface Props {
+  date: Date;
+  style?: 'short' | 'long';
+}
+
+const { date, style = 'short' } = Astro.props;
+
+// Frontmatter dates are UTC midnight; format in UTC so the build machine's
+// timezone can't shift a post to the previous day.
+const label = date.toLocaleDateString(SITE.locale, {
+  year: 'numeric',
+  month: style,
+  day: 'numeric',
+  timeZone: 'UTC',
+});
+---
+
+<time datetime={date.toISOString()}>{label}</time>

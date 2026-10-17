@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="Page not found">
+  <header class="page-head hang">
+    <p class="code hang__margin" aria-hidden="true">404</p>
+    <div>
+      <h1>Page not found</h1>
+      <p>Nothing lives at this address. The link may be mistyped, or the page may have moved.</p>
+    </div>
+  </header>
+  <p class="more">
+    <a href="/">Go to the home page</a> or <a href="/blog/">browse all posts</a>.
+  </p>
+</Base>
+
+<style>
+  .code {
+    margin-top: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    line-height: 1.12;
+    color: var(--rule);
+    font-variant-numeric: lining-nums;
+  }
+
+  .more {
+    margin-top: 0;
+    color: var(--muted);
+  }
+</style>

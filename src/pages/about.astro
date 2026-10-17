@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../consts';
+import { socialLinks } from '../utils/social';
+---
+
+<Base title="About" description={`About ${SITE.author}`}>
+  <header class="page-head">
+    <h1>About</h1>
+  </header>
+  <div class="prose">
+    <p>
+      Hi, I'm {SITE.author}. This page is a placeholder — add a short bio, what you work on, and how
+      to reach you.
+    </p>
+    <h2>Elsewhere</h2>
+    <ul>
+      {
+        socialLinks.map((link) => (
+          <li>
+            <a href={link.href}>{link.label}</a>
+          </li>
+        ))
+      }
+      <li><a href="/rss.xml">RSS feed</a></li>
+    </ul>
+  </div>
+</Base>
