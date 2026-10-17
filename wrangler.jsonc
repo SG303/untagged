@@ -4,6 +4,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "untagged-blog",
   "compatibility_date": "2026-10-17",
+  // staging URL (untagged-blog.*.workers.dev) stays reachable until the
+  // custom domain is attached; preview branch builds get their own URLs
+  "workers_dev": true,
+  "preview_urls": true,
   "assets": {
     "directory": "./dist",
     // serves dist/404.html for unknown routes
