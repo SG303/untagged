@@ -1,0 +1,14 @@
+// Cloudflare Workers (static assets) configuration
+// Docs: https://developers.cloudflare.com/workers/static-assets/
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "untagged-blog",
+  "compatibility_date": "2026-10-17",
+  "assets": {
+    "directory": "./dist",
+    // serves dist/404.html for unknown routes
+    "not_found_handling": "404-page",
+    // /blog/hello-world and /blog/hello-world/ both work
+    "html_handling": "auto-trailing-slash"
+  }
+}
