@@ -36,6 +36,20 @@ Set `draft: true` to hide a post from listings and the feed while working on it.
 Note: on a public repo, drafts and future-dated posts remain *public in the git
 history* — they are only hidden from the rendered site and RSS.
 
+## Images in posts
+
+The CSP header allows images only from this site (`img-src 'self'`), so hotlink
+external images will not render — always commit images to the repository.
+
+- **Simple (no processing):** put the file in `public/images/<slug>/` and
+  reference it with an absolute path: `![Alt text](/images/<slug>/photo.png)`
+- **Optimized (recommended for larger images):** put the image next to the
+  post file (`src/content/blog/my-photo.png`) and reference it relatively:
+  `![Alt text](./my-photo.png)` — Astro automatically resizes, generates
+  width/height (no layout shift) and lazy-loads it
+- Screenshots are usually largest as PNG/WebP; try to keep files < ~300 KB
+  (the git history grows with every KB committed)
+
 ## Make it yours
 
 Edit `src/consts.ts` — site title, tagline, author, description and social links.
