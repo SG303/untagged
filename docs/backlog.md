@@ -1,18 +1,18 @@
-# Backlog (nicht umgesetzt – nur Erinnerung)
+# Backlog (agreed but NOT implemented yet)
 
-Vereinbart am 2026-10-17; umsetzen erst auf expliziten Wunsch.
+These were agreed on 2026-10-17. Implement them only on explicit request.
 
-## Blog-Automatisierung
-1. **Post-Scaffolding:** `npm run new-post "Titel"` → legt `src/content/blog/<slug>.md` mit Frontmatter an (draft: true).
-2. **Geplante Veröffentlichung:** Collection-Filter um `pubDate <= heute` erweitern (Posts mit Zukunfts-Datum erscheinen erst zum Datum).
-3. **Push = Deploy:** CI (GitHub Actions o.ä.) – build + deploy bei jedem Push, nächtlicher Cron-Build für Punkt 2.
-4. Renovate Bot für Dependency-Updates (wöchentlich).
-5. Link-Rot-Check (lychee) monatlich.
-6. Git-Mirror als Backup auf zweites privates Remote.
+## Blog automation
+1. **Post scaffolding:** `npm run new-post "Title"` → creates `src/content/blog/<slug>.md` with frontmatter pre-filled (`draft: true`).
+2. **Scheduled publishing:** extend the collection filters with `pubDate <= today`, so posts with a future date appear automatically on that day.
+3. **Push = deploy:** CI (GitHub Actions or similar) — build + deploy on every push, nightly cron build for item 2.
+4. Renovate Bot for dependency updates (weekly).
+5. Link-rot check (lychee) monthly.
+6. `git push --mirror` backup to a second private remote.
 
-## Hosting (Empfehlung ausgesprochen, Setup offen)
-- Cloudflare Pages (über GitHub-Repo), siehe Hosting-Diskussion.
-- Vor Deploy: `site:` in astro.config.mjs auf Produktions-URL setzen.
+## Hosting (recommended, setup pending)
+- Cloudflare Pages, connected to the GitHub repo, domain `untagged.dev` (bought via Cloudflare Registrar; the whole `.dev` TLD is on the browser HSTS preload list — HTTPS only).
+- Before first deploy: `site:` in `astro.config.mjs` points at the production URL (done in this repo).
 
-## Admin-GUI (aktuell abgelehnt, falls Interesse wieder aufkommt)
-- Keystatic (Local-Mode) – GUI im Dev-Server, schreibt in dieselben Markdown-Files.
+## Admin GUI (declined for now, keep in mind)
+- Keystatic (local mode) — GUI inside the dev server, writes to the same Markdown files.

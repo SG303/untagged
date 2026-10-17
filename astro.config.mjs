@@ -4,8 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: Set to your production URL before deploying (used for sitemap + RSS)
-  site: 'https://example.com',
+  // Production URL (used for the sitemap + RSS links)
+  site: 'https://untagged.dev',
   integrations: [sitemap()],
   markdown: {
     // Both themes ship as CSS variables; global.css picks one per color scheme
