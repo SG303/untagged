@@ -20,6 +20,8 @@ export const SITE = {
    */
   social: {
     github: 'https://github.com/SG303',
+    // SimpleLogin alias: real inbox stays private, replies route to it
+    email: 'mailto:untagged.ubcrd@simplelogin.com',
   },
 };
 
