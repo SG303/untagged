@@ -3,13 +3,14 @@
 
 export const SITE = {
   /** Used in <title>, header, RSS and sitemap */
-  title: 'Simon',
+  title: 'Untagged',
   /** Shown next to the title in the footer / meta description */
-  description: 'Personal blog — notes on software, design and whatever else is worth writing down.',
+  description:
+    'Personal notes on networking, WiFi, Linux and AI — plus everything that refuses to be tagged.',
   /** Your name, used for bylines and the about page */
   author: 'Simon',
-  /** Shown as a small tagline in the header area */
-  tagline: 'Notes & ideas',
+  /** Shown as the big heading on the home page */
+  tagline: 'Notes without tags',
   /** Base language of the site */
   locale: 'en',
   /** Optional links shown in the footer. Remove or extend freely. */
