@@ -33,6 +33,8 @@ Your content here — regular Markdown.
 ```
 
 Set `draft: true` to hide a post from listings and the feed while working on it.
+Note: on a public repo, drafts and future-dated posts remain *public in the git
+history* — they are only hidden from the rendered site and RSS.
 
 ## Make it yours
 

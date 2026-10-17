@@ -1,7 +1,7 @@
 {
   // https://docs.renovatebot.com/configuration-options/
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  extends: ['config:recommended'],
+  extends: ['config:recommended', 'helpers:pinGitHubActionDigests'],
   // one update window per week, Saturday early morning (UTC)
   schedule: ['before 7am every saturday'],
   labels: ['dependencies'],
@@ -12,11 +12,15 @@
       groupName: 'minor and patch updates',
       automerge: false,
     },
-    // GitHub Actions bumps (both workflows) go into a separate small PR
+    // GitHub Actions bumps (both workflows) go into a separate small PR,
+    // held back briefly so a freshly published release is not adopted
+    // within minutes (mitigates the moved-tag / supply-chain class of attack;
+    // pinGitHubActionDigests makes the checked-out commit immutable anyway)
     {
       matchManagers: ['github-actions'],
       groupName: 'github-actions',
       automerge: false,
+      minimumReleaseAge: '3 days',
     },
   ],
   // act on vulnerability reports immediately, not in the weekly batch

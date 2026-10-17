@@ -12,6 +12,9 @@ on:
     - cron: '5 0 * * *'
   workflow_dispatch:
 
+# Least privilege: this job calls curl only, it never touches the GitHub API
+permissions: {}
+
 jobs:
   rebuild:
     runs-on: ubuntu-latest
@@ -24,4 +27,5 @@ jobs:
             echo "::error::Secret CLOUDFLARE_DEPLOY_HOOK is not set (Workers project -> Settings -> Deploy hooks)"
             exit 1
           fi
-          curl -sS -X POST "$CLOUDFLARE_DEPLOY_HOOK"
+          # -f: a revoked/renamed hook returning 4xx/5xx must FAIL the job instead of exiting 0
+          curl -fsS -X POST --retry 3 --retry-all-errors --max-time 30 "$CLOUDFLARE_DEPLOY_HOOK"

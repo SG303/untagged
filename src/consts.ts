@@ -13,10 +13,13 @@ export const SITE = {
   tagline: 'Notes without tags',
   /** Base language of the site */
   locale: 'en',
-  /** Optional links shown in the footer. Remove or extend freely. */
+  /**
+   * Optional links shown in the footer and about page (src/utils/social.ts maps
+   * keys to labels; keys with falsy values are hidden). Add a real email back
+   * when you want it public: email: 'mailto:you@…'.
+   */
   social: {
-    github: 'https://github.com/yourname',
-    email: 'mailto:hello@example.com',
+    github: 'https://github.com/SG303',
   },
 };
 

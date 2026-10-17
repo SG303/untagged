@@ -1,7 +1,7 @@
 ---
 ---
 
-<button type="button" class="theme-toggle" aria-label="Dark theme" aria-pressed="false">
+<button type="button" class="theme-toggle" aria-label="Switch to dark theme">
   <svg class="icon icon--moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
     <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path>
   </svg>
@@ -17,9 +17,14 @@
   const root = document.documentElement;
   const media = window.matchMedia('(prefers-color-scheme: dark)');
 
-  const stored = () => {
+  // Follow the system until the reader has made an explicit choice. The
+  // pre-paint script in Base.astro accepts only 'light'/'dark', so treat any
+  // other stored value (e.g. a stale/malformed entry) as "no choice" instead of
+  // forever freezing the theme on load-time system preference.
+  const chosen = () => {
     try {
-      return localStorage.getItem('theme');
+      const stored = localStorage.getItem('theme');
+      return stored === 'light' || stored === 'dark' ? stored : null;
     } catch {
       return null;
     }
@@ -28,7 +33,9 @@
   const sync = () => {
     const dark = root.dataset.theme === 'dark';
     document.querySelectorAll<HTMLButtonElement>('.theme-toggle').forEach((button) => {
-      button.setAttribute('aria-pressed', String(dark));
+      // single-source a11y model: the accessible name states the action the
+      // button performs (the visible icon shows the same target theme)
+      button.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
     });
   };
 
@@ -47,7 +54,7 @@
 
   // Follow the system until the reader makes an explicit choice
   media.addEventListener('change', (event) => {
-    if (stored()) return;
+    if (chosen()) return;
     root.dataset.theme = event.matches ? 'dark' : 'light';
     sync();
   });

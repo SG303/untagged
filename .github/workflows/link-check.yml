@@ -8,30 +8,38 @@ on:
     - cron: '30 2 1 * *'
   workflow_dispatch:
 
+# Least privilege: this job only reads the repo and opens one issue
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   links:
     runs-on: ubuntu-latest
     steps:
+      # Renovate maintains this pin (digest-pinned via renovate.json5)
       - uses: actions/checkout@v7
 
       - name: Check links with lychee
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
+          # --timeout takes INTEGER seconds ('20s' would abort at argument parsing, exit 2)
+          # --root-dir=. lets root-relative Markdown links resolve instead of erroring
           args: >-
             --verbose
             --no-progress
             --max-retries=2
-            --timeout=20s
+            --timeout=20
+            --root-dir=.
             './**/*.md'
-            './**/*.astro'
-            --exclude 'https?://(localhost|127\.0\.0\.1|.*\.local)'
           fail: true
-          format: json
-          output: /tmp/lychee/out.json
+          format: markdown
+          output: /tmp/lychee/out.md
 
       - name: Create issue on failure
-        if: failure()
+        # only when lychee itself failed (not on unrelated earlier step failures)
+        if: failure() && steps.lychee.conclusion == 'failure'
         uses: peter-evans/create-issue-from-file@v6
         with:
           title: Link check found broken links
