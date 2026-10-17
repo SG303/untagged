@@ -1,6 +1,6 @@
 <img src="assets/icon.svg" width="64" height="64" alt="">
 
-# Blog
+# Untagged
 
 A minimal, content-first personal blog built with [Astro](https://astro.build).
 
