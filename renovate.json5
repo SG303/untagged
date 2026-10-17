@@ -1,0 +1,27 @@
+{
+  // https://docs.renovatebot.com/configuration-options/
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['config:recommended'],
+  // one update window per week, Saturday early morning (UTC)
+  schedule: ['before 7am every saturday'],
+  labels: ['dependencies'],
+  packageRules: [
+    // minor + patch updates together in ONE weekly PR
+    {
+      matchUpdateTypes: ['minor', 'patch'],
+      groupName: 'minor and patch updates',
+      automerge: false,
+    },
+    // GitHub Actions bumps (both workflows) go into a separate small PR
+    {
+      matchManagers: ['github-actions'],
+      groupName: 'github-actions',
+      automerge: false,
+    },
+  ],
+  // act on vulnerability reports immediately, not in the weekly batch
+  osvVulnerabilityAlerts: true,
+  vulnerabilityAlerts: {
+    labels: ['security'],
+  },
+}
