@@ -451,6 +451,14 @@ time {
 
 /* ---- Motion ------------------------------------------------------------- */
 
+/* Cross-fade between pages (no JS). Browsers without support ignore it, and
+   readers who prefer reduced motion never opt in. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
