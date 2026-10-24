@@ -13,7 +13,7 @@
     "directory": "./dist",
     // serves dist/404.html for unknown routes
     "not_found_handling": "404-page",
-    // /blog/hello-world and /blog/hello-world/ both work
+    // /blog/<slug> and /blog/<slug>/ both work
     "html_handling": "auto-trailing-slash"
   }
 }

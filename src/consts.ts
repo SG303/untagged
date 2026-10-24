@@ -24,6 +24,3 @@ export const SITE = {
     email: 'mailto:untagged.ubcrd@simplelogin.com',
   },
 };
-
-/** Number of posts shown on the home page before the "all posts" link takes over */
-export const POSTS_ON_HOME = 5;

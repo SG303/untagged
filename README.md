@@ -18,7 +18,8 @@ npm run build    # static build into ./dist
 
 ## Writing a post
 
-Create a Markdown file in `src/content/blog/` (filename = URL slug):
+Run `npm run new-post -- "My title"` (creates a draft) or create a Markdown file in
+`src/content/blog/` by hand (filename = URL slug):
 
 ```markdown
 ---
@@ -65,7 +66,7 @@ src/
 ├── content/blog/      # your posts (Markdown)
 ├── layouts/           # Base layout (head, nav, footer, theme script)
 ├── components/        # Header, Footer, ThemeToggle, PostList
-├── pages/             # routes: /, /blog, /blog/[slug], /about, /rss.xml
+├── pages/             # routes: / (post list), /blog/[slug], /about, /rss.xml
 └── styles/global.css  # design tokens + shared styles
 ```
 

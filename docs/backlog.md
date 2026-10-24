@@ -25,3 +25,6 @@
 
 ## Admin GUI (declined for now, keep in mind)
 - Keystatic (local mode) — GUI inside the dev server, writes to the same Markdown files.
+
+## Site structure
+- 2026-10-24: Home and /blog were merged — the home page carries the full post list, `/blog/` 301-redirects to `/` (`public/_redirects`), post URLs (`/blog/<slug>/`) and RSS are unchanged. If the post count grows large, reintroduce an archive page / pagination.
