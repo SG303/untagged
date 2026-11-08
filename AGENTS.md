@@ -32,9 +32,9 @@ day. Pull requests get Cloudflare preview URLs.
 - Keep JavaScript to the theme toggle; the site works without it.
 - `docs/backlog.md` holds open ideas.
 - UI work: use the frontend-design skill (vendored in `.claude/skills/`).
+- License: MIT for everything, code and posts (`LICENSE`). The vendored
+  frontend-design skill keeps its own license file.
 
 ## Deviations from baseline
 
 - `tool-canon`: no ESLint or Vitest; the build (`astro build`) is the check.
-- `license`: no license yet; the owner decides how code and posts are
-  licensed.

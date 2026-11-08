@@ -74,3 +74,8 @@ src/
 
 The build output in `dist/` is static and deploys anywhere — Vercel, Netlify,
 Cloudflare Pages or GitHub Pages.
+
+## License
+
+[MIT](LICENSE), for the code and the posts. The vendored skill in
+`.claude/skills/frontend-design/` keeps its own license (`LICENSE.txt`).
