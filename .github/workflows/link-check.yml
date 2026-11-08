@@ -17,7 +17,7 @@ jobs:
   links:
     runs-on: ubuntu-latest
     steps:
-      # Renovate maintains this pin (digest-pinned via renovate.json5)
+      # Dependabot keeps this version current (.github/dependabot.yml)
       - uses: actions/checkout@v7
 
       - name: Check links with lychee
