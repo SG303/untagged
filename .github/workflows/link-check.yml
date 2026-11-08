@@ -17,12 +17,14 @@ jobs:
   links:
     runs-on: ubuntu-latest
     steps:
-      # Dependabot keeps this version current (.github/dependabot.yml)
-      - uses: actions/checkout@v7
+      # Dependabot keeps these versions current (.github/dependabot.yml)
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Check links with lychee
         id: lychee
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           # --timeout takes INTEGER seconds ('20s' would abort at argument parsing, exit 2)
           # --root-dir=. lets root-relative Markdown links resolve instead of erroring
@@ -40,7 +42,7 @@ jobs:
       - name: Create issue on failure
         # only when lychee itself failed (not on unrelated earlier step failures)
         if: failure() && steps.lychee.conclusion == 'failure'
-        uses: peter-evans/create-issue-from-file@v6
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6.0.0
         with:
           title: Link check found broken links
           content-filepath: /tmp/lychee/out.md
