@@ -4,7 +4,7 @@ Minimal, content-first personal blog built with Astro, served as static
 assets by Cloudflare Workers on the custom domain untagged.dev. Public repo.
 Default branch is `master`.
 
-Follows the SG303 baseline v1 (`sgstack/global/AGENTS.md`,
+Follows the SG303 baseline v2 (`sgstack/global/AGENTS.md`,
 `sgstack/baseline/tools.md`). If you cannot read those: work on a branch,
 open a PR, merge only with green checks (squash); never commit secrets or
 personal data; English for everything in the repo; talk to me in German.

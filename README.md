@@ -4,6 +4,9 @@
 
 A minimal, content-first personal blog built with [Astro](https://astro.build).
 
+> [!NOTE]
+> Personal project, built with AI coding agents under my supervision. Review the code carefully before you use it.
+
 - **Blog-focused**: Markdown posts, clean reading experience, RSS feed
 - **Almost zero JavaScript**: only a tiny script for the dark/light theme toggle
 - **One config file**: everything personal lives in `src/consts.ts`
@@ -74,6 +77,12 @@ src/
 
 The build output in `dist/` is static and deploys anywhere — Vercel, Netlify,
 Cloudflare Pages or GitHub Pages.
+
+## Status
+
+Personal project, built with AI coding agents under my supervision. There is
+no support and no stability guarantee; review the code carefully before you
+rely on it. See [LICENSE](LICENSE) for the warranty terms.
 
 ## License
 
