@@ -8,7 +8,7 @@ A minimal, content-first personal blog built with [Astro](https://astro.build).
 > Personal project, built with AI coding agents under my supervision. Review the code carefully before you use it.
 
 - **Blog-focused**: Markdown posts, clean reading experience, RSS feed
-- **Almost zero JavaScript**: only a tiny script for the dark/light theme toggle
+- **Minimal JavaScript**: only the dark/light theme toggle and Astro hover prefetch (works completely without JS)
 - **One config file**: everything personal lives in `src/consts.ts`
 
 ## Getting started
@@ -64,19 +64,22 @@ The about page is `src/pages/about.astro`.
 
 ```
 src/
-├── consts.ts          # site configuration (name, tagline, socials)
+├── consts.ts          # site configuration (name, tagline, timezone, socials)
 ├── content.config.ts  # blog collection schema
 ├── content/blog/      # your posts (Markdown)
 ├── layouts/           # Base layout (head, nav, footer, theme script)
-├── components/        # Header, Footer, ThemeToggle, PostList
-├── pages/             # routes: / (post list), /blog/[slug], /about, /rss.xml
+├── components/        # Header, Footer, ThemeToggle, PostList, FormattedDate
+├── pages/             # routes: / (post list), /blog/[...slug], /about, /404, /rss.xml
+├── utils/             # post visibility/sorting and social link helpers
 └── styles/global.css  # design tokens + shared styles
 ```
 
 ## Deploying
 
-The build output in `dist/` is static and deploys anywhere — Vercel, Netlify,
-Cloudflare Pages or GitHub Pages.
+This site is configured for Cloudflare Workers Static Assets (`wrangler.jsonc`,
+with security headers in `public/_headers` and redirects in `public/_redirects`).
+The build output in `dist/` is plain static HTML/CSS/JS and can also be hosted
+elsewhere (adapt headers and redirects to the target host).
 
 ## Status
 

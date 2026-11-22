@@ -1,18 +1,34 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { SITE } from '../consts';
+
+/** Format an instant as YYYY-MM-DD in the configured site timezone. */
+function calendarDay(date: Date, timeZone: string): string {
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(date);
+}
 
 /**
  * A post is publicly visible when it is not a draft AND its publish
- * date has arrived. This is what powers "scheduled publishing":
- * set `pubDate` to a future date and the post automatically appears
- * on that day, after the first rebuild (nightly rebuild via CI).
+ * calendar date has arrived in SITE.timezone. This powers "scheduled
+ * publishing" without hiding a post written shortly after local midnight
+ * (when UTC is still on the previous day).
  */
-export function isPublished(post: CollectionEntry<'blog'>): boolean {
-  return !post.data.draft && post.data.pubDate <= new Date();
+export function isPublished(
+  post: CollectionEntry<'blog'>,
+  now: Date = new Date(),
+): boolean {
+  if (post.data.draft) return false;
+  const pubDay = post.data.pubDate.toISOString().slice(0, 10);
+  return pubDay <= calendarDay(now, SITE.timezone);
 }
 
 /** All visible posts, newest first. */
 export async function getPublishedPosts(): Promise<CollectionEntry<'blog'>[]> {
-  return (await getCollection('blog', isPublished)).sort(
+  return (await getCollection('blog', (post) => isPublished(post))).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
   );
 }

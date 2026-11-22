@@ -8,8 +8,8 @@ name: Scheduled rebuild
 
 on:
   schedule:
-    # 00:05 UTC — shortly after midnight so today's posts appear when the day starts
-    - cron: '5 0 * * *'
+    # 00:17 UTC — off-peak minute after midnight so today's posts appear without hitting the :00/:05 queue
+    - cron: '17 0 * * *'
   workflow_dispatch:
 
 # Least privilege: this job calls curl only, it never touches the GitHub API

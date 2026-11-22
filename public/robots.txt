@@ -4,6 +4,7 @@
 # published signal survives; adjust it freely — see https://developers.cloudflare.
 # com/network/crawlers/ for the semantics.
 User-agent: *
+Content-Signal: search=yes, ai-input=no, ai-train=no
 Allow: /
 
 # --- Cloudflare content signals (carried over verbatim) ---

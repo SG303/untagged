@@ -1,4 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#db2777"/>
-  <text x="32" y="32" dy="0.35em" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#ffffff">B</text>
+  <style>
+    .paper { fill: #f7f8fa; }
+    .ink { stroke: #1a2233; }
+    .rule { stroke: #556a30; }
+    @media (prefers-color-scheme: dark) {
+      .paper { fill: #1b1c1e; }
+      .ink { stroke: #e5e5e6; }
+      .rule { stroke: #a5b47c; }
+    }
+  </style>
+  <rect class="paper" width="64" height="64" rx="14"/>
+  <path class="rule" d="M22 8v48" stroke-width="4"/>
+  <path class="ink" d="M31 22h21M31 32h21M31 42h13" stroke-width="5" stroke-linecap="round"/>
 </svg>

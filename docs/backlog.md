@@ -3,9 +3,9 @@
 ## Blog automation
 1. ~~**Post scaffolding**~~ — DONE 2026-10-17: `npm run new-post -- "Title" [--date YYYY-MM-DD]` (scripts/new-post.mjs).
 2. ~~**Scheduled publishing**~~ — DONE 2026-10-17: posts with a future `pubDate` are excluded from pages, listings and RSS (src/utils/posts.ts); they appear automatically on their date with the first rebuild.
-3. ~~**Scheduled rebuild**~~ — DONE 2026-10-17: `.github/workflows/scheduled-rebuild.yml` pings the Cloudflare deploy hook nightly at 00:05 UTC.
+3. ~~**Scheduled rebuild**~~ — DONE 2026-10-17: `.github/workflows/scheduled-rebuild.yml` pings the Cloudflare deploy hook nightly at 00:17 UTC (moved off `:05` to reduce GitHub Actions midnight cron delay).
    - Manual step done the same day: repo secret `CLOUDFLARE_DEPLOY_HOOK` set; verified end-to-end (hook returned `status: queued`).
-4. ~~**Dependency updates**~~ — DONE 2026-10-17 with Renovate; replaced by Dependabot on 2026-11-08 (Renovate had stopped opening PRs after 2026-10-17). `.github/dependabot.yml`: npm + github-actions weekly on Saturday 07:00 Europe/Zurich, minor/patch grouped into one PR, 3-day cooldown for actions. Dependabot alerts + security updates enabled in the repo settings.
+4. ~~**Dependency updates**~~ — DONE 2026-10-17 with Renovate; replaced by Dependabot on 2026-11-08 (Renovate had stopped opening PRs after 2026-10-17). `.github/dependabot.yml`: npm + github-actions weekly on Sunday 22:00 Europe/Zurich, minor/patch grouped into one PR with auto-merge, 7-day cooldown for both ecosystems. Dependabot alerts + security updates enabled in the repo settings.
    - Note: Dependabot does not update `.node-version`; bump it by hand when moving to a new Node LTS.
 5. ~~**Link-rot check**~~ — DONE 2026-10-17, HARDENED later the same day: the first version was completely inoperative (invalid `--timeout=20s` aborted lychee at argument parsing; json/markdown output mismatch; missing `issues: write`). Fixed and manually verified.
    - Note: GitHub auto-disables scheduled workflows in public repos after 60 days without repo activity; merging Dependabot's weekly PRs counts as activity, so it stays alive while the bot merges.

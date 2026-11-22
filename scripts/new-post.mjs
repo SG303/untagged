@@ -1,21 +1,31 @@
 #!/usr/bin/env node
 // Scaffolds a new blog post: `npm run new-post -- "My Title"` (add --date 2026-12-01 to schedule it)
 import { existsSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
+import { parseArgs } from 'node:util';
 
-const args = process.argv.slice(2);
-const title = args.find((arg, i) => !arg.startsWith('--') && !(i > 0 && args[i - 1] === '--date'));
-const dateFlagIdx = args.indexOf('--date');
-if (dateFlagIdx !== -1 && !args[dateFlagIdx + 1]) {
-  console.error('Missing value for --date — expected YYYY-MM-DD');
+let parsed;
+try {
+  parsed = parseArgs({
+    args: process.argv.slice(2),
+    allowPositionals: true,
+    options: {
+      date: { type: 'string' },
+    },
+  });
+} catch (err) {
+  console.error(err.message);
+  console.error('Usage: npm run new-post -- "My Title" [--date YYYY-MM-DD]');
   process.exit(1);
 }
 
-// Local calendar date (not UTC) so a CET/CEST author writing after local midnight
-// gets the date they see on their clock. FormattedDate/builds treat it as UTC midnight.
+const title = parsed.positionals.join(' ').trim();
+
+// Local calendar date (matches SITE.timezone on the author's machine) so writing
+// after local midnight produces today's date without being treated as future.
 const now = new Date();
 const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-const date = dateFlagIdx !== -1 ? args[dateFlagIdx + 1] : today;
+const date = parsed.values.date ?? today;
 
 // Round-trip validation catches impossible dates like 2026-02-31 (which would
 // silently roll over to March)
@@ -48,9 +58,11 @@ if (!slug) {
   process.exit(1);
 }
 
-const path = join('src/content/blog', `${slug}.md`);
+const repoRoot = join(import.meta.dirname, '..');
+const path = join(repoRoot, 'src/content/blog', `${slug}.md`);
+const displayPath = relative(process.cwd(), path) || path;
 if (existsSync(path)) {
-  console.error(`Already exists: ${path}`);
+  console.error(`Already exists: ${displayPath}`);
   process.exit(1);
 }
 
@@ -70,7 +82,7 @@ const frontmatter = [
 ].join('\n');
 
 writeFileSync(path, frontmatter);
-console.log(`Created: ${path}`);
+console.log(`Created: ${displayPath}`);
 console.log(`  Title:    ${title}`);
 console.log(`  pubDate:  ${date}`);
 console.log('When done writing: set draft: false to publish on/after pubDate.');
