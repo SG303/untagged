@@ -29,3 +29,15 @@
 
 ## Site structure
 - 2026-10-24: Home and /blog were merged — the home page carries the full post list, `/blog/` 301-redirects to `/` (`public/_redirects`), post URLs (`/blog/<slug>/`) and RSS are unchanged. If the post count grows large, reintroduce an archive page / pagination.
+
+## Review follow-ups (2026-11-22)
+- **Verify Dependabot auto-merge on the first real Dependabot PR**: `.github/workflows/dependabot-auto-merge.yml` uses `on: pull_request` (matches the `sgstack` baseline v2 template and passes `zizmor`); confirm whether GitHub allows `gh pr merge --auto` with `GITHUB_TOKEN` or downgrades it to read-only for `dependabot[bot]`.
+- **Article Open Graph metadata**: add `og:type="article"`, `article:published_time`, and `article:modified_time` in `src/layouts/Base.astro` for blog posts.
+- **Minor cleanup**: remove unused `.sr-only` in `src/styles/global.css` (unless needed) and deduplicate the topic sentence shared between `src/consts.ts` and `src/pages/about.astro`.
+- **Optional CI type-check**: add `astro check` to CI if the codebase grows (currently an accepted `tool-canon` deviation in `AGENTS.md`).
+
+## Feature ideas
+- **Local draft preview in dev (`import.meta.env.DEV`)**: show drafts and future-dated posts during `npm run dev` (with a subtle "Draft" indicator in the margin) while keeping them excluded from production builds.
+- **Full-content RSS feed**: include rendered post bodies in `src/pages/rss.xml.ts` instead of `description` only.
+- **Build-time Open Graph images**: generate simple notebook-margin `og:image` cards per post at build time using the already-installed `sharp` dependency.
+- **Post navigation & reading time**: previous/next post links at the bottom of `src/pages/blog/[...slug].astro`, subtle reading time in the margin, and an optional HTML-only `<details>` table of contents for longer posts.
