@@ -27,13 +27,15 @@ jobs:
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           # --timeout takes INTEGER seconds ('20s' would abort at argument parsing, exit 2)
-          # --root-dir=. lets root-relative Markdown links resolve instead of erroring
+          # --root-dir=public lets root-relative post assets (/images/...) resolve cleanly
+          # --exclude-path skips vendored skills under .claude/
           args: >-
             --verbose
             --no-progress
             --max-retries=2
             --timeout=20
-            --root-dir=.
+            --root-dir="${{ github.workspace }}/public"
+            --exclude-path '(^|/)\.claude/'
             './**/*.md'
           fail: true
           format: markdown

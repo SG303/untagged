@@ -13,6 +13,8 @@ export const SITE = {
   tagline: 'Notes without tags',
   /** Base language of the site */
   locale: 'en',
+  /** Author timezone used to evaluate calendar publish dates consistently across builds */
+  timezone: 'Europe/Zurich',
   /**
    * Optional links shown in the footer and about page (src/utils/social.ts maps
    * keys to labels; keys with falsy values are hidden). Add a real email back

@@ -29,7 +29,7 @@ const year = new Date().getFullYear();
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 1.5rem;
+    gap: 1rem 1.5rem;
     padding: 0;
     list-style: none;
     font-family: var(--font-sans);
@@ -42,11 +42,11 @@ const year = new Date().getFullYear();
     color: var(--muted);
   }
 
-  /* Invisible hit-area extension for touch screens */
+  /* Invisible hit-area extension for touch screens, bounded by the list gaps */
   a::after {
     content: '';
     position: absolute;
-    inset: -0.5rem -1rem;
+    inset: -0.5rem -0.75rem;
   }
 
   a:hover {

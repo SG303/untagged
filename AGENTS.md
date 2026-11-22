@@ -26,10 +26,12 @@ day. Pull requests get Cloudflare preview URLs.
 
 - Personal settings (site title, author, links) live in `src/consts.ts` only.
 - Posts are Markdown files in `src/content/blog/`; the filename is the URL
-  slug. Front matter: `title`, `description`, `pubDate`, `tags`, `draft`.
+  slug. Front matter: `title`, `description`, `pubDate`, `updatedDate`
+  (optional), `tags`, `draft`.
 - Drafts and future-dated posts are hidden on the site and in RSS but stay
   public in the git history. Never commit anything that must stay private.
-- Keep JavaScript to the theme toggle; the site works without it.
+- Keep JavaScript minimal (theme toggle and Astro hover prefetch); the site
+  works without it.
 - `docs/backlog.md` holds open ideas.
 - UI work: use the frontend-design skill (vendored in `.claude/skills/`).
 - License: MIT for everything, code and posts (`LICENSE`). The vendored
@@ -37,4 +39,5 @@ day. Pull requests get Cloudflare preview URLs.
 
 ## Deviations from baseline
 
-- `tool-canon`: no ESLint or Vitest; the build (`astro build`) is the check.
+- `tool-canon`: no ESLint, Vitest, or `tsc`/`astro check`; the build
+  (`astro build`) is the check.

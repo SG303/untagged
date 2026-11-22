@@ -10,7 +10,7 @@ const nav = [
 const trim = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);
 const current = trim(Astro.url.pathname);
 
-// Exact match is the current page; a parent section (Blog on a post) is marked too
+// Exact match is the current page; subpages under a non-root section are marked too
 const ariaCurrent = (href: string) => {
   const target = trim(href);
   if (current === target) return 'page';
@@ -73,7 +73,7 @@ const ariaCurrent = (href: string) => {
   ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 1.5rem;
+    gap: 0.5rem 1.5rem;
     padding: 0;
     list-style: none;
     font-family: var(--font-sans);
@@ -88,11 +88,11 @@ const ariaCurrent = (href: string) => {
     text-decoration: none;
   }
 
-  /* Invisible hit-area extension so the small links meet the ~44px touch guideline */
+  /* Invisible hit-area extension (~44px touch target) sized to stay within the list gaps */
   nav a::after {
     content: '';
     position: absolute;
-    inset: -0.5rem -1rem;
+    inset: -0.25rem -0.75rem;
   }
 
   nav a:hover {
