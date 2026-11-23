@@ -8,14 +8,17 @@ on:
     - cron: '30 2 1 * *'
   workflow_dispatch:
 
-# Least privilege: this job only reads the repo and opens one issue
+# Least privilege: read-only at the top; only the job that opens the issue
+# gets write access to issues
 permissions:
   contents: read
-  issues: write
 
 jobs:
   links:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     steps:
       # Dependabot keeps these versions current (.github/dependabot.yml)
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
